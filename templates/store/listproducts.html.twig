@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {% block body %}
+	<div id="lstProducts" class="container-fluid">
+		<div class="row">
+			<div class="col-3">
+				<div class="prd_image">
+					<img src="{{ asset('images/cursophp.jpg') }}" alt="Nombre producto">
+				</div>
+				<div class="prd_title">					
+					<span>Curso PHP</span>
+				</div>
+				<div class="prd_price">					
+					<span>$200.000</span>
+				</div>
+				<div class="prd_buton">					
+					<button type="submit" class="btn btn-success">Comprar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+    {% endblock %}
+{% endblock %}
