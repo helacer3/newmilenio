@@ -24,7 +24,7 @@ class OrderService
 	/**
 	* get User Orders
 	*/
-	public function getCustomerOrders(string $cstEmail): ?array {
+	public function getCustomerOrders(string $cstEmail = ""): ?array {
 		// crete Default Var
 		$arrOrders = array();
 		try {
@@ -33,8 +33,8 @@ class OrderService
 	    	// create Query
 	    	$arrOrders = $qb->select('o')
 			   ->from(Orders::class, 'o')
-			   ->where('o.customerEmail = :customerEmail')
-			   ->setParameter('customerEmail', $cstEmail)
+			   // ->where('o.customerEmail = :customerEmail')
+			   // ->setParameter('customerEmail', $cstEmail)
 			   ->orderBy('o.created_at', 'ASC')
 			   ->getQuery()
 			   ->getResult();

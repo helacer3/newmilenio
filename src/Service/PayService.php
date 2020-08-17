@@ -49,7 +49,7 @@ class PayService
 	    	$reqPayment  = $this->defineWebCheckout($refOrder, $datUser);
             // object Request Serializer
             $jsnRequest  = $this->srlService->serializerObjectToJson($reqPayment);
-            //dd($jsnRequest);
+            dd($jsnRequest);
 	    	// get URl Request
 	    	$urlRequest  = $this->params->get('PTP_URL_DEV');
 	    	// request Payment Rest
@@ -58,7 +58,6 @@ class PayService
                 "https://test.placetopay.com/redirection/api/session/",
                 array('body' => $jsnRequest)
             );
-            dd($response);
     	} catch (\Exception $ex) {
     		echo "Error: ".$ex->getMessage()."-".$ex->getFile()."-".$ex->getLine();die;
     	}

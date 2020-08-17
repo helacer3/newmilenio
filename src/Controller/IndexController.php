@@ -45,6 +45,7 @@ class IndexController extends BaseController
     */  
     public function ordersStore(OrderService $orderService)
     {
+        // user Email on Session
         $cstEmail = "";
         // get Customer Orders
         $cstOrders = $orderService->getCustomerOrders($cstEmail);
