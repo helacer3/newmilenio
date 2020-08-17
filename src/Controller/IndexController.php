@@ -4,6 +4,8 @@ namespace App\Controller;
 use App\Controller\Base\BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+// services
+use App\Service\OrderService;
 
 /**
  * Controlador principal
@@ -36,5 +38,20 @@ class IndexController extends BaseController
     public function resumeStore()
     {
         return $this->render('store/resumeproduct.html.twig');
+    }
+
+    /**
+    * @Route("/showOrders", name="orders_store")
+    */  
+    public function ordersStore(OrderService $orderService)
+    {
+        $cstEmail = "";
+        // get Customer Orders
+        $cstOrders = $orderService->getCustomerOrders($cstEmail);
+        // render View
+        return $this->render('reports/saleslist.html.twig', array(
+                'cstOrders' => $cstOrders
+            )
+        );
     }
 }

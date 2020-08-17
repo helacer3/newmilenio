@@ -3,6 +3,8 @@
 namespace App\Service;
 // entities
 use App\Entity\Orders;
+// services
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Order Service
