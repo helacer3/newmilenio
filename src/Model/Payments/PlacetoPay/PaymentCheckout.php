@@ -1,14 +1,14 @@
 <?php
-namespace App\Model;
+namespace App\Model\Payments\PlacetoPay;
 
 /**
 * Web checkout
 */
 class PaymentCheckout {
 	protected string $reference;
-	protected string $decription;
+	protected string $description;
 	protected array  $amount;
-	protected string $allowPartial;
+	protected bool   $allowPartial;
 
     /**
      * @return mixed
@@ -33,19 +33,19 @@ class PaymentCheckout {
     /**
      * @return mixed
      */
-    public function getDecription():string
+    public function getDescription():string
     {
-        return $this->decription;
+        return $this->description;
     }
 
     /**
-     * @param mixed $decription
+     * @param mixed $description
      *
      * @return self
      */
-    public function setDecription(string $decription)
+    public function setDescription(string $description)
     {
-        $this->decription = $decription;
+        $this->description = $description;
 
         return $this;
     }
@@ -73,7 +73,7 @@ class PaymentCheckout {
     /**
      * @return mixed
      */
-    public function getAllowPartial():string
+    public function getAllowPartial():bool
     {
         return $this->allowPartial;
     }
@@ -83,7 +83,7 @@ class PaymentCheckout {
      *
      * @return self
      */
-    public function setAllowPartial(string $allowPartial)
+    public function setAllowPartial(bool $allowPartial)
     {
         $this->allowPartial = $allowPartial;
 

@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="col-3">
 				<div class="prd_image">
-					<img src="{{ asset('images/cursophp.jpg') }}" alt="Nombre producto">
+					<img src="{{ asset('images/cursophp.jpg') }}" alt="Nombre producto" style="max-width:100%; height: auto;">
 				</div>
 				<div class="prd_title">					
 					<span>Curso PHP</span>
@@ -15,7 +15,7 @@
 					<span>$200.000</span>
 				</div>
 				<div class="prd_buton">					
-					<button type="submit" class="btn btn-success">Comprar</button>
+					<a href="{{ path('resume_store') }}" class="btn btn-success">Comprar</a>
 				</div>
 			</div>
 		</div>

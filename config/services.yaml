@@ -4,7 +4,11 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-
+    PTP_URL_DEV: '%env(PTP_URL_DEV)%'
+    PTP_URL_PROD: '%env(PTP_URL_PROD)%'
+    PTP_LOGIN_DEV: '%env(PTP_LOGIN_DEV)%'
+    PTP_TRANKEY_DEV: '%env(PTP_TRANKEY_DEV)%'
+    
 services:
     # default configuration for services in *this* file
     _defaults:

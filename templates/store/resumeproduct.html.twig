@@ -9,7 +9,7 @@
 			</div>
 			<div class="col-3">
 				<div class="prd_image">
-					<img src="{{ asset('images/cursophp.jpg') }}" alt="Nombre producto">
+					<img src="{{ asset('images/cursophp.jpg') }}" alt="Nombre producto" style="max-width:100%; height: auto;">
 				</div>
 				<div class="prd_title">					
 					<span>Curso PHP</span>
@@ -20,7 +20,7 @@
 			</div>
 			<div class="col-9">
 				Favor diligencie los siguientes datos para finalizar la compra:
-				<form>
+				<form method="post" action="{{ path('process_payment') }}">
 					<div class="form-group">
 						<label for="cst_name">Nombre Completo</label>
 						<input type="text" class="form-control" id="cst_name" name="cst_name" placeholder="Favor ingrese su nombre completo" required>

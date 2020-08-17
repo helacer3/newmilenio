@@ -20,7 +20,7 @@ use App\Entity\User;
 /**
  * Clase con la información de la Orden
  * @author Snayder Acero
- * @ORM\Table(name="prb_order")
+ * @ORM\Table(name="order")
  * @ORM\Entity
  */
 class Order
@@ -63,6 +63,13 @@ class Order
     protected $customerMobile;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="payment_result", type="text", nullable=true)
+     */
+    protected $paymenResult;
+
+    /**
      * @var datetime
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
@@ -79,7 +86,7 @@ class Order
     /**
      * @var float
      *
-     * @ORM\Column(name="Value", type="float", nullable=false)
+     * @ORM\Column(name="value", type="float", nullable=false)
      */
     protected $value;
 
@@ -89,4 +96,204 @@ class Order
      * @ORM\Column(name="Status", type="string", nullable=false)
      */
     protected $status;
+
+    /**
+     * @return int
+     */
+    public function getId():int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return self
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOrderNumber():string
+    {
+        return $this->orderNumber;
+    }
+
+    /**
+     * @param string $orderNumber
+     *
+     * @return self
+     */
+    public function setOrderNumber(string $orderNumber)
+    {
+        $this->orderNumber = $orderNumber;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomerName():string
+    {
+        return $this->customerName;
+    }
+
+    /**
+     * @param string $customerName
+     *
+     * @return self
+     */
+    public function setCustomerName(string $customerName)
+    {
+        $this->customerName = $customerName;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomerEmail(): string
+    {
+        return $this->customerEmail;
+    }
+
+    /**
+     * @param string $customerEmail
+     *
+     * @return self
+     */
+    public function setCustomerEmail(string $customerEmail)
+    {
+        $this->customerEmail = $customerEmail;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomerMobile(): string
+    {
+        return $this->customerMobile;
+    }
+
+    /**
+     * @param string $customerMobile
+     *
+     * @return self
+     */
+    public function setCustomerMobile(string $customerMobile)
+    {
+        $this->customerMobile = $customerMobile;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaymenResult():string 
+    {
+        return $this->paymenResult;
+    }
+
+    /**
+     * @param string $paymenResult
+     *
+     * @return self
+     */
+    public function setPaymenResult(string $paymenResult)
+    {
+        $this->paymenResult = $paymenResult;
+
+        return $this;
+    }
+
+    /**
+     * @return datetime
+     */
+    public function getCreatedAt():datetime
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * @param datetime $created_at
+     *
+     * @return self
+     */
+    public function setCreatedAt(datetime $created_at)
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * @return datetime
+     */
+    public function getUpdatedAt():datetime
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * @param datetime $updated_at
+     *
+     * @return self
+     */
+    public function setUpdatedAt(datetime $updated_at)
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getValue():float
+    {
+        return $this->value;
+    }
+
+    /**
+     * @param float $value
+     *
+     * @return self
+     */
+    public function setValue(float $value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus():string
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     *
+     * @return self
+     */
+    public function setStatus(string $status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
 }

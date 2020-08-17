@@ -1,8 +1,8 @@
 <?php
-namespace App\Model;
+namespace App\Model\Payments\PlacetoPay;
 
 /**
-* Web checkout
+* Auth checkout
 */
 class AuthCheckout {
 	protected string $login;

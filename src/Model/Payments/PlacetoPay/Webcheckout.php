@@ -1,9 +1,9 @@
 <?php
-namespace App\Model;
+namespace App\Model\Payments\PlacetoPay;
 
-use App\Model\AuthCheckout;
-use App\Model\PaymentCheckout;
-use App\Model\BuyerCheckout;
+use App\Model\Payments\PlacetoPay\AuthCheckout;
+use App\Model\Payments\PlacetoPay\PaymentCheckout;
+use App\Model\Payments\PlacetoPay\BuyerCheckout;
 
 /**
 * Web checkout

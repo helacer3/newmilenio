@@ -4,11 +4,6 @@ namespace App\Controller;
 use App\Controller\Base\BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
-// services
-use App\Service\UserService;
-use App\Service\WalletService;
-use App\Service\ProductService;
 
 /**
  * Controlador principal
@@ -17,7 +12,7 @@ use App\Service\ProductService;
 class IndexController extends BaseController
 {
     /*
-    * _construct
+    * construct
     */
     public function __construct()
     {
@@ -28,6 +23,10 @@ class IndexController extends BaseController
     */  
     public function productsStore()
     {
+        /*
+        TO DO
+        Llamado al servicio con la informacin de los productos
+        */
         return $this->render('store/listproducts.html.twig');
     }
 
