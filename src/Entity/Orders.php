@@ -37,70 +37,56 @@ class Order
     /**
      * @var string
      *
+     * @ORM\Column(name="order_number", type="string", length=15, nullable=false)
+     */
+    protected $orderNumber;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="customer_name", type="string", length=100, nullable=false)
      */
-    protected string $customerName;
+    protected $customerName;
 
     /**
      * @var string
      *
      * @ORM\Column(name="customer_email", type="string", length=59, nullable=false)
      */
-    protected string $customerEmail;
+    protected $customerEmail;
 
     /**
      * @var string
      *
      * @ORM\Column(name="customer_mobile", type="string", length=15, nullable=false)
      */
-    protected string $customerMobile;
+    protected $customerMobile;
 
     /**
      * @var datetime
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
-    protected string $created_at;
+    protected $created_at;
 
     /**
      * @var datetime
      *
      * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
-    protected string $updated_at;
+    protected $updated_at;
 
     /**
      * @var float
      *
      * @ORM\Column(name="Value", type="float", nullable=false)
      */
-    protected float $value;
+    protected $value;
 
     /**
      * @var string
      *
      * @ORM\Column(name="Status", type="string", nullable=false)
      */
-    protected string $status;
- 
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
+    protected $status;
 }
