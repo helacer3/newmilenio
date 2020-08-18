@@ -20,10 +20,10 @@ use App\Entity\User;
 /**
  * Clase con la información de la Orden
  * @author Snayder Acero
- * @ORM\Table(name="order")
+ * @ORM\Table(name="orders")
  * @ORM\Entity
  */
-class Order
+class Orders
 {
     /**
      * @var int
@@ -37,9 +37,16 @@ class Order
     /**
      * @var string
      *
-     * @ORM\Column(name="order_number", type="string", length=15, nullable=false)
+     * @ORM\Column(name="order_number", type="string", length=20, nullable=false)
      */
     protected $orderNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id_request", type="string", length=10, nullable=false)
+     */
+    protected $idRequest;
 
     /**
      * @var string
@@ -51,7 +58,7 @@ class Order
     /**
      * @var string
      *
-     * @ORM\Column(name="customer_email", type="string", length=59, nullable=false)
+     * @ORM\Column(name="customer_email", type="string", length=50, nullable=false)
      */
     protected $customerEmail;
 
@@ -67,7 +74,7 @@ class Order
      *
      * @ORM\Column(name="payment_result", type="text", nullable=true)
      */
-    protected $paymenResult;
+    protected $paymentResult;
 
     /**
      * @var datetime
@@ -140,6 +147,26 @@ class Order
     /**
      * @return string
      */
+    public function getIdRequest():string
+    {
+        return $this->idRequest;
+    }
+
+    /**
+     * @param string $orderNumber
+     *
+     * @return self
+     */
+    public function setIdRequest(string $idRequest)
+    {
+        $this->idRequest = $idRequest;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function getCustomerName():string
     {
         return $this->customerName;
@@ -200,19 +227,19 @@ class Order
     /**
      * @return string
      */
-    public function getPaymenResult():string 
+    public function getPaymentResult():string 
     {
-        return $this->paymenResult;
+        return $this->paymentResult;
     }
 
     /**
-     * @param string $paymenResult
+     * @param string $paymentResult
      *
      * @return self
      */
-    public function setPaymenResult(string $paymenResult)
+    public function setPaymentResult(string $paymentResult)
     {
-        $this->paymenResult = $paymenResult;
+        $this->paymentResult = $paymentResult;
 
         return $this;
     }
@@ -220,7 +247,7 @@ class Order
     /**
      * @return datetime
      */
-    public function getCreatedAt():datetime
+    public function getCreatedAt()
     {
         return $this->created_at;
     }
@@ -230,7 +257,7 @@ class Order
      *
      * @return self
      */
-    public function setCreatedAt(datetime $created_at)
+    public function setCreatedAt($created_at)
     {
         $this->created_at = $created_at;
 
@@ -240,7 +267,7 @@ class Order
     /**
      * @return datetime
      */
-    public function getUpdatedAt():datetime
+    public function getUpdatedAt()
     {
         return $this->updated_at;
     }
@@ -250,7 +277,7 @@ class Order
      *
      * @return self
      */
-    public function setUpdatedAt(datetime $updated_at)
+    public function setUpdatedAt($updated_at)
     {
         $this->updated_at = $updated_at;
 

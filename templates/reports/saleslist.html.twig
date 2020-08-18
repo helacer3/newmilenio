@@ -2,42 +2,42 @@
 
 {% block content %}
     {% block body %}
-	<div id="lstOrders" class="container-fluid">
-		<div class="row">
-			<div class="col-12 mt-3">
-				{% if cstOrders|length > 0 %}
-					<table class="table">
-						<thead>
+	<div class="row">
+		<div class="col-12 mt-3">
+			{% if cstOrders|length > 0 %}
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Order Number</th>
+							<th scope="col">Order Request</th>
+							<th scope="col">Customer Name</th>
+							<th scope="col">Value</th>
+							<th scope="col">Created Date</th>
+							<th scope="col">Updated Date</th>
+							<th scope="col">Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for order in cstOrders %}
 							<tr>
-								<th scope="col">ID</th>
-								<th scope="col">Order Number</th>
-								<th scope="col">Customer Name</th>
-								<th scope="col">Value</th>
-								<th scope="col">Created Date</th>
-								<th scope="col">Updated Date</th>
-								<th scope="col">Status</th>
+								<th scope="row">{{order.id}}</th>
+								<th scope="row">{{order.orderNumber}}</th>
+								<th scope="row">{{order.idRequest}}</th>
+								<th scope="row">{{order.customerName}}</th>
+								<th scope="row">{{order.value|number_format(0)}}</th>
+								<th scope="row">{{order.createdAt|date('Y-m-d H:i:s')}}</th>
+								<th scope="row">{{order.updatedAt|date('Y-m-d H:i:s')}}</th>
+								<th scope="row">
+									{{ order.status }}
+								</th>
 							</tr>
-						</thead>
-						<tbody>
-							{% for order in cstOrders %}
-								<tr>
-									<th scope="row">{{order.id}}</th>
-									<th scope="row">{{order.order_number}}</th>
-									<th scope="row">{{order.customer_name}}</th>
-									<th scope="row">{{order.value}}</th>
-									<th scope="row">{{order.created_at}}</th>
-									<th scope="row">{{order.updated_at}}</th>
-									<th scope="row">
-										{{ order.status }}
-									</th>
-								</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-				{% else %}
-					<div class="alert alert-info">No tiene órdenes en el sistema</div>
-				{% endif %}
-			</div>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% else %}
+				<div class="alert alert-info">No tiene órdenes en el sistema</div>
+			{% endif %}
 		</div>
 	</div>
     {% endblock %}

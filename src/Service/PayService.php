@@ -24,6 +24,7 @@ class PayService
 	protected $router;
     protected $client;
     protected $srlService;
+    protected $urlRequest;
 
     /*
     * construct
@@ -38,32 +39,100 @@ class PayService
     	$this->router      = $router;
         $this->client      = $client;
         $this->srlService  = $srlService;
+        // get URl Request
+        $this->urlRequest  = $this->params->get('PTP_URL_DEV');
     }
 
     /*
-    * request Payment
+    * request Payment Status
     */
-    public function requestPayment(string $refOrder, array $datUser) {
+    public function requestPaymentStatus(string $refOrder): array {
+        // crete Default Var
+        $arrPayment = array(
+            'status' => 'ERROR',
+            'data'   => array()
+        );
     	try {
 	    	// instance Class Model
-	    	$reqPayment  = $this->defineWebCheckout($refOrder, $datUser);
+	    	$reqPayment  = $this->defineAuthCheckout($refOrder);
             // object Request Serializer
             $jsnRequest  = $this->srlService->serializerObjectToJson($reqPayment);
-            dd($jsnRequest);
-	    	// get URl Request
-	    	$urlRequest  = $this->params->get('PTP_URL_DEV');
 	    	// request Payment Rest
-            $response = $this->client->request(
+            $response    = $this->client->request(
                 'POST',
-                "https://test.placetopay.com/redirection/api/session/",
-                array('body' => $jsnRequest)
+                $this->urlRequest.$refOrder,
+                array(
+                    'headers' => array(
+                        'Accept'       => 'application/json',
+                        'Content-Type' => 'application/json',
+                    ),
+                    'body' => json_encode(array('auth' => json_decode($jsnRequest, true)))
+                )    
+            );
+            // set Array Payment
+            $arrPayment = array(
+                'status' => 'OK',
+                'data'   =>  $response->toArray()
             );
     	} catch (\Exception $ex) {
     		echo "Error: ".$ex->getMessage()."-".$ex->getFile()."-".$ex->getLine();die;
     	}
     	// default Return
-    	return $reqPayment;
+    	return $arrPayment;
     }
+
+
+/*
+    * request Payment Status
+    */
+    public function requestPayment(string $refOrder, array $datUser): array {
+        // crete Default Var
+        $arrPayment = array(
+            'status' => 'ERROR',
+            'data'   => array()
+        );
+        try {
+            // instance Class Model
+            $reqPayment  = $this->defineWebCheckout($refOrder, $datUser);
+            // object Request Serializer
+            $jsnRequest  = $this->srlService->serializerObjectToJson($reqPayment);
+            // request Payment Rest
+            $response    = $this->client->request(
+                'POST',
+                $this->urlRequest,
+                array(
+                    'headers' => array(
+                        'Accept'       => 'application/json',
+                        'Content-Type' => 'application/json',
+                    ),
+                    'body' => $jsnRequest
+                )    
+            );
+            // array Response
+            $arrResponse = $response->toArray();
+            // validate Response
+            if ($arrResponse['status']['status'] == "OK") {
+                // set Array Payment
+                $arrPayment = array(
+                    'status' => 'OK',
+                    'data'   =>  array_merge(
+                        $datUser,
+                        array(
+                            'refOrder'   => $refOrder,
+                            'urlProcess' => $arrResponse['processUrl'],
+                            'idRequest'  => $arrResponse['requestId']
+                        )
+                    )
+                );
+            }
+        } catch (\Exception $ex) {
+            echo "Error: ".$ex->getMessage()."-".$ex->getFile()."-".$ex->getLine();die;
+        }
+        // default Return
+        return $arrPayment;
+    }
+
+
 
 	/*
     * define Auth Checkout
@@ -73,10 +142,11 @@ class PayService
     	$webCheckout = new WebCheckout();
 		$webCheckout->setAuth($this->defineAuthCheckout($refOrder));
     	$webCheckout->setBuyer($this->defineBuyerCheckout($datUser));
-    	$webCheckout->setPayment($this->definePaymentCheckout($refOrder));
+    	$webCheckout->setPayment($this->definePaymentCheckout($refOrder, $datUser));
     	$webCheckout->setLocale("en_CO");
     	$webCheckout->setExpiration("2020-11-05T00:00:00-05:00");
-    	$webCheckout->setReturnUrl($this->router->generate('response_payment', array(), urlGeneratorInterface::ABSOLUTE_URL));
+    	$webCheckout->setReturnUrl(
+            $this->router->generate('response_payment', array('refOrder' => $refOrder), urlGeneratorInterface::ABSOLUTE_URL));
     	$webCheckout->setIpAddress("127.0.0.1");
     	$webCheckout->setUserAgent("PlacetoPay Sandbox");
     	// default Return
@@ -88,14 +158,21 @@ class PayService
     * define Auth Checkout
     */
     public function defineAuthCheckout(string $refOrder):AuthCheckout {
-        // create Datetime
-        $objDateTime = new \DateTime('NOW', new \DateTimeZone('America/Bogota'));
-    	// instance Class Model
-    	$autCheckout = new AuthCheckout();
+        // instance Class Model
+        $autCheckout = new AuthCheckout();
+        // create Seed
+        $trnSeed     = date('c');
+        // nonce String
+        $nonString   = "Orden: ".$refOrder;
+        // nonce
+        $trnNonce    = base64_encode($nonString); 
+        // trn Key - Base64(SHA-1(nonce + seed + secretkey))
+        $trnKey      = base64_encode(sha1($nonString.$trnSeed.$this->params->get('PTP_TRANKEY_DEV'), true));
+        // set Model Values
     	$autCheckout->setLogin($this->params->get('PTP_LOGIN_DEV'));
-    	$autCheckout->setTranKey($this->params->get('PTP_TRANKEY_DEV'));
-    	$autCheckout->setNonce(base64_encode("Orden: ".$refOrder));
-    	$autCheckout->setSeed($objDateTime->format('c'));
+    	$autCheckout->setTranKey($trnKey);
+    	$autCheckout->setNonce($trnNonce);
+    	$autCheckout->setSeed($trnSeed);
     	// default Return
     	return $autCheckout;
     }
@@ -103,7 +180,7 @@ class PayService
     /*
     * define Pay Checkout
     */
-    public function definePaymentCheckout(string $refOrder):PaymentCheckout {
+    public function definePaymentCheckout(string $refOrder, array $datUser):PaymentCheckout {
     	// instance Class Model
     	$payCheckout = new PaymentCheckout();
     	$payCheckout->setReference($refOrder);
@@ -111,7 +188,7 @@ class PayService
     	$payCheckout->setAmount(
     		array(
     			'currency' => 'COP',
-    			'total'    => 200000 
+    			'total'    => $datUser['value'] 
     		)
     	);
     	$payCheckout->setAllowPartial(false);
