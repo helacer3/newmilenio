@@ -69,13 +69,15 @@ class PayService
                     'body' => json_encode(array('auth' => json_decode($jsnRequest, true)))
                 )    
             );
+            //dd($response);
             // set Array Payment
             $arrPayment = array(
                 'status' => 'OK',
                 'data'   =>  $response->toArray()
             );
     	} catch (\Exception $ex) {
-    		echo "Error: ".$ex->getMessage()."-".$ex->getFile()."-".$ex->getLine();die;
+            //dd($ex);
+    		//echo "Error: ".$ex->getMessage()."-".$ex->getFile()."-".$ex->getLine();die;
     	}
     	// default Return
     	return $arrPayment;
@@ -96,6 +98,7 @@ class PayService
             $reqPayment  = $this->defineWebCheckout($refOrder, $datUser);
             // object Request Serializer
             $jsnRequest  = $this->srlService->serializerObjectToJson($reqPayment);
+            //dd($jsnRequest);
             // request Payment Rest
             $response    = $this->client->request(
                 'POST',
@@ -144,7 +147,7 @@ class PayService
     	$webCheckout->setBuyer($this->defineBuyerCheckout($datUser));
     	$webCheckout->setPayment($this->definePaymentCheckout($refOrder, $datUser));
     	$webCheckout->setLocale("en_CO");
-    	$webCheckout->setExpiration("2020-11-05T00:00:00-05:00");
+    	$webCheckout->setExpiration("2020-12-31T00:00:00-05:00");
     	$webCheckout->setReturnUrl(
             $this->router->generate('response_payment', array('refOrder' => $refOrder), urlGeneratorInterface::ABSOLUTE_URL));
     	$webCheckout->setIpAddress("127.0.0.1");
