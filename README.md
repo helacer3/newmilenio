@@ -3,13 +3,13 @@
 _ Tienda con integración con sistema de pagos PlaceToPay (Web Checkout)
 
 ## Comentarios:
-_ Nota: El reporte de ordenes se dejó sin fitro de usuario, teniendo en cuenta que no existe una autenticación de usuarios, para validar qué ordenes mostrar
+_ El reporte de ordenes se dejó sin fitro de usuario, teniendo en cuenta que no existe un sistema de autenticación, para validar qué ordenes mostrar.
 
 ### Instalación 🔧
 
 _ clonar el proyecto
 
-_ composer update para descargar los paquetes necesario
+_ ejecutar composer install, para descargar los paquetes necesarios
 
 _ crear tablas de producto y ordenes con el comando: php bin/console doctrine:schema:update --force
 
