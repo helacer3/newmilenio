@@ -26,13 +26,14 @@ class OrderService
 	/**
 	* create Orders
 	*/
-	public function createOrder(array $arrData): ?bool {
+	public function createOrder(int $productId, array $arrData): ?bool {
 		// crete Default Var
 		$boolValidate = true;
 		try {
 			$cslOrder = new Orders();
     		// set Data
     		$cslOrder->setOrderNumber($arrData['refOrder']);
+    		$cslOrder->setIdProduct($productId);
     		$cslOrder->setIdRequest($arrData['idRequest']);
     		$cslOrder->setCustomerName($arrData['name']);
     		$cslOrder->setCustomerEmail($arrData['email']);

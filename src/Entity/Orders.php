@@ -42,6 +42,13 @@ class Orders
     protected $orderNumber;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_product", type="integer", length=11, nullable=false)
+     */
+    protected $idProduct;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="id_request", type="string", length=10, nullable=false)
@@ -104,10 +111,12 @@ class Orders
      */
     protected $status;
 
+    
+
     /**
      * @return int
      */
-    public function getId():int
+    public function getId()
     {
         return $this->id;
     }
@@ -117,7 +126,7 @@ class Orders
      *
      * @return self
      */
-    public function setId(int $id)
+    public function setId($id)
     {
         $this->id = $id;
 
@@ -127,7 +136,7 @@ class Orders
     /**
      * @return string
      */
-    public function getOrderNumber():string
+    public function getOrderNumber()
     {
         return $this->orderNumber;
     }
@@ -137,7 +146,7 @@ class Orders
      *
      * @return self
      */
-    public function setOrderNumber(string $orderNumber)
+    public function setOrderNumber($orderNumber)
     {
         $this->orderNumber = $orderNumber;
 
@@ -145,19 +154,39 @@ class Orders
     }
 
     /**
+     * @return int
+     */
+    public function getIdProduct()
+    {
+        return $this->idProduct;
+    }
+
+    /**
+     * @param int $idProduct
+     *
+     * @return self
+     */
+    public function setIdProduct($idProduct)
+    {
+        $this->idProduct = $idProduct;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
-    public function getIdRequest():string
+    public function getIdRequest()
     {
         return $this->idRequest;
     }
 
     /**
-     * @param string $orderNumber
+     * @param string $idRequest
      *
      * @return self
      */
-    public function setIdRequest(string $idRequest)
+    public function setIdRequest($idRequest)
     {
         $this->idRequest = $idRequest;
 
@@ -167,7 +196,7 @@ class Orders
     /**
      * @return string
      */
-    public function getCustomerName():string
+    public function getCustomerName()
     {
         return $this->customerName;
     }
@@ -177,7 +206,7 @@ class Orders
      *
      * @return self
      */
-    public function setCustomerName(string $customerName)
+    public function setCustomerName($customerName)
     {
         $this->customerName = $customerName;
 
@@ -187,7 +216,7 @@ class Orders
     /**
      * @return string
      */
-    public function getCustomerEmail(): string
+    public function getCustomerEmail()
     {
         return $this->customerEmail;
     }
@@ -197,7 +226,7 @@ class Orders
      *
      * @return self
      */
-    public function setCustomerEmail(string $customerEmail)
+    public function setCustomerEmail($customerEmail)
     {
         $this->customerEmail = $customerEmail;
 
@@ -207,7 +236,7 @@ class Orders
     /**
      * @return string
      */
-    public function getCustomerMobile(): string
+    public function getCustomerMobile()
     {
         return $this->customerMobile;
     }
@@ -217,7 +246,7 @@ class Orders
      *
      * @return self
      */
-    public function setCustomerMobile(string $customerMobile)
+    public function setCustomerMobile($customerMobile)
     {
         $this->customerMobile = $customerMobile;
 
@@ -227,7 +256,7 @@ class Orders
     /**
      * @return string
      */
-    public function getPaymentResult():string 
+    public function getPaymentResult()
     {
         return $this->paymentResult;
     }
@@ -237,7 +266,7 @@ class Orders
      *
      * @return self
      */
-    public function setPaymentResult(string $paymentResult)
+    public function setPaymentResult($paymentResult)
     {
         $this->paymentResult = $paymentResult;
 
@@ -287,7 +316,7 @@ class Orders
     /**
      * @return float
      */
-    public function getValue():float
+    public function getValue()
     {
         return $this->value;
     }
@@ -297,7 +326,7 @@ class Orders
      *
      * @return self
      */
-    public function setValue(float $value)
+    public function setValue($value)
     {
         $this->value = $value;
 
@@ -307,7 +336,7 @@ class Orders
     /**
      * @return string
      */
-    public function getStatus():string
+    public function getStatus()
     {
         return $this->status;
     }
@@ -317,7 +346,7 @@ class Orders
      *
      * @return self
      */
-    public function setStatus(string $status)
+    public function setStatus($status)
     {
         $this->status = $status;
 

@@ -52,7 +52,7 @@ class PaymentController extends BaseController
         // validate Status
         if ($arrPayment['status'] == 'OK') {
             // create Order
-            $this->ordService->createOrder($arrPayment['data']);
+            $this->ordService->createOrder($productId, $arrPayment['data']);
             // redirect User
             return $this->redirect($arrPayment['data']['urlProcess']);
         }
