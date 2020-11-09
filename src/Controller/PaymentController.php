@@ -5,6 +5,7 @@ use App\Controller\Base\BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 // service
+use App\Service\ProductService;
 use App\Service\OrderService;
 use App\Service\PayService;
 
@@ -16,14 +17,16 @@ class PaymentController extends BaseController
 {
     protected $payService;
     protected $ordService;
+    protected $productService;
 
     /*
     * construct
     */
-    public function __construct(PayService $payService, OrderService $ordService)
+    public function __construct(ProductService $productService, PayService $payService, OrderService $ordService)
     {
-        $this->payService = $payService;
-        $this->ordService = $ordService;
+        $this->productService = $productService;
+        $this->payService     = $payService;
+        $this->ordService     = $ordService;
     }
 
     /**
@@ -31,9 +34,13 @@ class PaymentController extends BaseController
     */  
     public function processPayment(Request $request)
     {
+        // id Product
+        $productId  = $request->request->get('cst_id');
+        // load Product
+        $objProduct = $this->productService->findProductById($productId);
         // request Vars
-        $datUser = array(
-            'value' => (float)200000,
+        $datUser    = array (
+            'value' => (float)$objProduct->getValue(),
             'name'  => $request->request->get('cst_name', ''),
             'email' => $request->request->get('cst_email', ''),
             'phone' => $request->request->get('cst_phone', '')

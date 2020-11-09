@@ -4,7 +4,9 @@ namespace App\Controller;
 use App\Controller\Base\BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-// services
+
+// service
+use App\Service\ProductService;
 use App\Service\OrderService;
 
 /**
@@ -23,21 +25,29 @@ class IndexController extends BaseController
     /**
     * @Route("/", name="product_store")
     */  
-    public function productsStore()
+    public function productsStore(ProductService $products)
     {
-        /*
-        TO DO
-        Llamado al servicio con la informacin de los productos
-        */
-        return $this->render('store/listproducts.html.twig');
+        // find Products
+        $arrProducts = $products->findProducts();
+        // render View
+        return $this->render('store/listproducts.html.twig', array(
+            'arrProducts' => $arrProducts
+        ));
     }
 
     /**
     * @Route("/resume", name="resume_store")
     */  
-    public function resumeStore()
+    public function resumeStore(Request $request, ProductService $products)
     {
-        return $this->render('store/resumeproduct.html.twig');
+        // request ID
+        $id = $request->query->get('id');
+        // find Product
+        $objProduct = $products->findProductById($id);
+        // render View
+        return $this->render('store/resumeproduct.html.twig', array(
+            'objProduct' => $objProduct
+        ));
     }
 
     /**
