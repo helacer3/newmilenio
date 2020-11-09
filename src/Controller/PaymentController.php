@@ -55,10 +55,10 @@ class PaymentController extends BaseController
             $this->ordService->createOrder($productId, $arrPayment['data']);
             // redirect User
             return $this->redirect($arrPayment['data']['urlProcess']);
-        }
-        // temporal Error
-        die("No se logro procesar el pago");
-        
+        } else {
+            // temporal Error
+            die("No se logro procesar el pago");
+       } 
     }
 
     /**
