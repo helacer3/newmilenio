@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {% block body %}
+	<div class="row">
+		{% for customer in arrCustomers %}
+			<div class="col-12">
+				<div class="row">
+					<div class="col-6">Tipo Documento</div>
+					<div class="col-6">
+						<select name="cst_tipdocument" id="cst_tipdocument">
+							<option value="">Tipo Documento</option>
+							<option value="1">CC</option>
+							<option value="2">CE</option>
+						</select>
+					</div>
+					<div class="col-6">Num Documento</div>
+					<div class="col-6">
+						<input type="text" id="cst_numdocument" name="cst_numdocument" value="" required />
+					</div>
+					<div class="col-6">Primer Nombre</div>
+					<div class="col-6">
+						<input type="text" id="cst_frsname" name="cst_frsname" value="" required />
+					</div>
+					<div class="col-6">Segundo Nombre</div>
+					<div class="col-6">
+						<input type="text" id="cst_lstname" name="cst_lstname" value="" required />
+					</div>
+					<div class="col-6">Apellidos</div>
+						<input type="text" id="cst_surname" name="cst_surname" value="" required />
+					<div class="col-6">
+					</div>
+					<div class="col-6">Dirección</div>
+					<div class="col-6">
+						<input type="text" id="cst_address" name="cst_address" value="" required />
+					</div>
+					<div class="col-6">Teléfono</div>
+					<div class="col-6">
+						<input type="text" id="cst_phone" name="cst_phone" value="" required />
+					</div>
+					<div class="col-6">Email</div>
+					<div class="col-6">
+						<input type="text" id="cst_email" name="cst_email" value="" required />
+					</div>
+					<div class="col-6">Ocupación</div>
+					<div class="col-6">
+						<input type="text" id="cst_employment" name="cst_employment" value="" required />
+					</div>
+					<div class="col-6">Departamento</div>
+					<div class="col-6">
+						<select name="cst_department" id="cst_department">
+							<option value="">Departament</option>
+							<option value="1">Cundinamarca</option>
+							<option value="2">Nariño</option>
+						</select>
+					</div>
+					<div class="col-6">Ciudad</div>
+					<div class="col-6">
+						<select name="cst_city" id="cst_city">
+							<option value="">Ciudad</option>
+							<option value="1">Cartagena</option>
+							<option value="2">Barranquilla</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+    {% endblock %}
+{% endblock %}
