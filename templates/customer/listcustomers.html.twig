@@ -20,16 +20,16 @@
 		{% for customer in arrCustomers %}
 			<div class="col-12">
 				<div class="row">
-					<div class="col-1">{{}}</div>
-					<div class="col-1">Núm Documento</div>
-					<div class="col-2">Nombres</div>
-					<div class="col-2">Apellidos</div>
-					<div class="col-1">Dirección</div>
-					<div class="col-1">Teléfono</div>
-					<div class="col-1">Correo</div>
-					<div class="col-1">Ocupación</div>
-					<div class="col-1">Departamento</div>
-					<div class="col-1">Ciudad</div>
+					<div class="col-1">{{ customer.documentType }}</div>
+					<div class="col-1">{{ customer.documentNumber }}</div>
+					<div class="col-2">{{ customer.firstName }} {{ customer.lastName }}</div>
+					<div class="col-2">{{ customer.surname }}</div>
+					<div class="col-1">{{ customer.address }}</div>
+					<div class="col-1">{{ customer.phone }}</div>
+					<div class="col-1">{{ customer.email }}</div>
+					<div class="col-1">{{ customer.employment }}</div>
+					<div class="col-1">{{ customer.idDepartment }}</div>
+					<div class="col-1">{{ customer.idCity }}</div>
 				</div>
 			</div>
 		{% endfor %}

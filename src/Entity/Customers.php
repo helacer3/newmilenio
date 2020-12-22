@@ -96,14 +96,14 @@ class Customers
     /**
      * @var int
      *
-     * @ORM\Column(name="id_department", type="int", nullable=false)
+     * @ORM\Column(name="id_department", type="integer", nullable=false)
      */
     protected $idDepartment;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="id_city", type="int", nullable=false)
+     * @ORM\Column(name="id_city", type="integer", nullable=false)
      */
     protected $idCity;
 

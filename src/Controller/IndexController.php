@@ -6,8 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 // service
-use App\Service\ProductService;
-use App\Service\OrderService;
+use App\Service\CustomerService;
 
 /**
  * Controlador principal
@@ -27,11 +26,21 @@ class IndexController extends BaseController
     */  
     public function listCustomers(CustomerService $customers)
     {
-        // find Products
-        //$arrProducts = $products->findProducts();
+        // find Customers
+        $arrCustomers = $customers->findCustomers();
         // render View
-        return $this->render('store/listcustomers.html.twig', array(
-            //'arrProducts' => $arrProducts
+        return $this->render('customer/listcustomers.html.twig', array(
+            'arrCustomers' => $arrCustomers
+        ));
+    }
+
+    /**
+    * @Route("/create", name="customer_create")
+    */  
+    public function createCustomer(CustomerService $customers)
+    {
+        // render View
+        return $this->render('customer/newcustomers.html.twig', array(
         ));
     }
 }

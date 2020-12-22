@@ -1,5 +1,5 @@
 <?php
-// src/Service/ProductService.php
+// src/Service/CustomerService.php
 namespace App\Service;
 // entities
 use App\Entity\Customers;
@@ -39,7 +39,7 @@ class CustomerService
 			   ->getQuery()
 			   ->getResult();
    		} catch (\Exception $ex) {
-   			//dd($ex);
+   			dd($ex);
    		}
    		// default Return
    		return $arrProducts;
@@ -56,7 +56,7 @@ class CustomerService
 	    	$qb          = $this->em->createQueryBuilder();
 	    	// create Query
 	    	$objCustomer = $qb->select('c')
-			   ->from(Product::class, 'c')
+			   ->from(Customers::class, 'c')
 			   ->where('c.id = :id')
 			   ->andWhere('c.status = :status')
 			   ->setParameter('id', $idCustomer)
